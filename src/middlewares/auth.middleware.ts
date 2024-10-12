@@ -1,18 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt.util";
 
-interface AuthRequest extends Request {
-  userId?: number;
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: number;
+    }
+  }
 }
 
 export function authMiddleware(
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction
-) {
+): void {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).json({ error: "No token provided" });
+    res.status(401).json({ error: "No token provided" });
+    return;
   }
 
   const [, token] = authHeader.split(" ");
@@ -22,6 +27,6 @@ export function authMiddleware(
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Invalid token" });
+    res.status(401).json({ error: "Invalid token" });
   }
 }
