@@ -2,9 +2,14 @@ import prisma from "../config/database";
 
 export function getAllTechModules(search: string = "") {
   if (search) {
-    return prisma.techModule.findFirst({
+    return prisma.techModule.findFirstOrThrow({
       where: {
         name: search,
+      },
+      select: {
+        name: true,
+        slugName: true,
+        code: true,
       },
     });
   }
@@ -25,6 +30,10 @@ export function createTechModules(
   userId: number
 ) {
   return prisma.techModule.create({ data: { ...data, userId } });
+}
+
+export function getTechModules(id: number) {
+  return prisma.techModule.findFirstOrThrow({ where: { id } });
 }
 
 export function updateTechModules(id: number, data: any) {
