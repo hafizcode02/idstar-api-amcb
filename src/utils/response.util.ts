@@ -4,11 +4,12 @@ export class ResponseError extends Error {
   }
 }
 
-export function successResponse(res: any, data: any, code = 200) {
+export function successResponse(res: any, message: any, data: any, code = 200) {
   return res.status(code).json({
     status: "success",
     code,
-    data
+    message,
+    data,
   });
 }
 

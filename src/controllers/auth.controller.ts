@@ -18,11 +18,7 @@ export async function register(
 
     const { user } = await authService.register(email, password, name);
     if (user) {
-      return successResponse(
-        res,
-        { message: "User created successfully", user },
-        201
-      );
+      return successResponse(res, "User created successfully", user, 201);
     }
   } catch (error: any) {
     next(error);
@@ -36,7 +32,8 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     if (user && token) {
       return successResponse(
         res,
-        { message: "User logged in successfully", token },
+        "User logged in successfully",
+        { token },
         200
       );
     }
