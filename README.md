@@ -56,4 +56,4 @@ Before you begin, ensure you have the following installed on your system:
   npm start
   ```
 
-The server will start on `http://localhost:3000` (or the port specified in your environment variables).
+The server will start on `http://localhost:3003` (or the port specified in your environment variables).
