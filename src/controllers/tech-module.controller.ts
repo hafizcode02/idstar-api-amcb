@@ -29,10 +29,10 @@ export async function createTechModules(
   next: NextFunction
 ) {
   try {
-    const { name, code } = req.body;
+    const { name, code, CoderByteModuleName } = req.body;
     const slugName = slugNameconverter(name);
 
-    const body = { name, slugName, code };
+    const body = { name, slugName, code, CoderByteModuleName };
     const data = createTechModuleSchema.parse(body);
 
     const techModuleExists = await techModuleService.isTechModuleExists(
@@ -77,10 +77,10 @@ export async function updateTechModules(
 ) {
   try {
     const id = parseInt(req.params.id);
-    const { name, code } = req.body;
+    const { name, code, CoderByteModuleName } = req.body;
     const slugName = slugNameconverter(name);
 
-    const data = updateTechModuleSchema.parse({ name, slugName, code });
+    const data = updateTechModuleSchema.parse({ name, slugName, code, CoderByteModuleName });
 
     const techModule = await techModuleService.updateTechModules(id, data);
     if (techModule) {

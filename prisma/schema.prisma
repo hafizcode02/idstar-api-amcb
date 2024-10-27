@@ -27,6 +27,7 @@ model TechModule {
   id        Int      @id @default(autoincrement())
   name      String
   slugName  String
+  CoderByteModuleName String @default("")
   code      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

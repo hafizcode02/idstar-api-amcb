@@ -26,6 +26,7 @@ export function createTechModules(
     name: string;
     slugName: string;
     code: string;
+    CoderByteModuleName: string;
   },
   userId: number
 ) {
