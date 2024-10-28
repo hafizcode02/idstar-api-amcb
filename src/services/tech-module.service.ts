@@ -9,6 +9,7 @@ export function getAllTechModules(search: string = "") {
       select: {
         name: true,
         slugName: true,
+        CoderByteModuleName: true,
         code: true,
       },
     });
