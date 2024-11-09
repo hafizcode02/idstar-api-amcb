@@ -13,9 +13,10 @@ export const errorMiddleware = async (
       status: "error",
       code: 400,
       message: "Validation Error",
-      errors: error.errors.map((error) => {
-        return error.message;
-      }),
+      errors: error.errors.map((error) => ({
+        field: error.path.join("."),
+        message: error.message,
+      })),
     });
   } else if (error instanceof ResponseError) {
     res.status(error.code).json({
